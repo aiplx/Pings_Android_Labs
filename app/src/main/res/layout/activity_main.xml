@@ -21,6 +21,33 @@
         android:id="@+id/mybutton">
     </Button>
 
+<!--    add a checkbox with an id checkBox-->
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compound_button_message"
+        android:id="@+id/checkBox">
+
+    </CheckBox>
+
+<!--add a radio button with an id radioButton-->
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compound_button_message"
+        android:id="@+id/radioButton">
+    </RadioButton>
+
+<!--    add a switch with an id switch1-->
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compound_button_message"
+        android:id="@+id/switch1"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
+
+    </Switch>
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,5 +56,20 @@
         android:id="@+id/myedittext">
     </EditText>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon"
+        android:id="@+id/myimage">
+
+    </ImageView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/myimagebutton"
+        android:contentDescription="TODO">
+
+    </ImageButton>
 
 </LinearLayout>

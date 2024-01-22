@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import algonquin.cst2335.lian0122.data.MainViewModel;
 import algonquin.cst2335.lian0122.databinding.ActivityMainBinding;
@@ -40,5 +41,31 @@ public class MainActivity extends AppCompatActivity {
         model.editString.observe(this,s -> {
             variableBinding.mytext.setText("Your edit text has " + s);
         });
+
+        // Page 5
+        variableBinding.checkBox.setOnCheckedChangeListener((btn,isChecked) ->{
+            model.isSelected.postValue(variableBinding.checkBox.isChecked());
+        });
+
+        variableBinding.radioButton.setOnCheckedChangeListener((btn,isChecked) ->{
+            model.isSelected.postValue(variableBinding.radioButton.isChecked());
+        });
+
+        variableBinding.switch1.setOnCheckedChangeListener((btn, isChecked) ->{
+            model.isSelected.postValue(variableBinding.switch1.isChecked());
+        });
+
+        model.isSelected.observe(this,selected ->{
+            variableBinding.checkBox.setChecked(selected);
+            variableBinding.radioButton.setChecked(selected);
+            variableBinding.switch1.setChecked(selected);
+
+            CharSequence text = "The value is now: " + selected ;
+            int duration = Toast.LENGTH_SHORT;
+            Toast.makeText(this,text ,duration).show();
+        });
+
+        // Page 6
+
     }
 }
