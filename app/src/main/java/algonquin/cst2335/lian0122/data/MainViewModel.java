@@ -8,4 +8,6 @@ public class MainViewModel extends ViewModel{
     public MutableLiveData<String> editString = new MutableLiveData<>(); // use MutableLiveData class to facility the holding value
 
     public MutableLiveData<Boolean> isSelected = new MutableLiveData<>(); // use MutableLiveData Class to monitor the change of compound button
+
+    public MutableLiveData<Boolean> isShown = new MutableLiveData<>(); // use MutableLiveData Class to monitor the change of my image
 }

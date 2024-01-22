@@ -48,18 +48,10 @@
 
     </Switch>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/editmessage"
-        android:hint="@string/hinttext"
-        android:id="@+id/myedittext">
-    </EditText>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/app_icon"
+        android:src="@drawable/logo_algonquin"
         android:id="@+id/myimage">
 
     </ImageView>
@@ -67,9 +59,16 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/myimagebutton"
-        android:contentDescription="TODO">
-
+        android:src="@drawable/logo_algonquin"
+        android:id="@+id/myimagebutton">
     </ImageButton>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editmessage"
+        android:hint="@string/hinttext"
+        android:id="@+id/myedittext">
+    </EditText>
 
 </LinearLayout>

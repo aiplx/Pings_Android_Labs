@@ -66,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Page 6
+        variableBinding.myimage.setOnClickListener(click -> {
+            model.isShown.postValue(!variableBinding.myimage.isShown());
+        });
 
+        model.isShown.observe(this, shown -> {
+            // Update the visibility of myimage based on the observed value
+            variableBinding.myimage.setVisibility(shown ? View.VISIBLE : View.GONE);
+        });
+
+        variableBinding.myimagebutton.setOnClickListener(click ->{
+            CharSequence text = "The width = " + variableBinding.myimagebutton.getMeasuredWidth() + " and height = " + variableBinding.myimagebutton.getMeasuredHeight() ;
+            int duration = Toast.LENGTH_SHORT;
+            Toast.makeText(this,text ,duration).show();
+        });
     }
 }
