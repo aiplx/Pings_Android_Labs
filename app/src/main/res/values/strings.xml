@@ -9,5 +9,5 @@
     <string name="email_message">Enter your email address:</string>
     <string name="email_message_hint">Type email here</string>
     <string name="pwd_message">Type your password:</string>
-    <string name="textView_message">TextView</string>
+    <string name="textView_message" />
 </resources>
