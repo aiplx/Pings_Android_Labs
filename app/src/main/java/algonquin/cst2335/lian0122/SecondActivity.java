@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -67,19 +68,26 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        // Retrieve the previously saved phone number, if any
+        String phoneNumber = prefs.getString("PhoneNumber","");
+
         Intent fromPrevious = getIntent();
         String emailAddress = fromPrevious.getStringExtra("EmailAddress");
         TextView tv_email = findViewById(R.id.textView_secondActivity);
         tv_email.setText("Welcome back " + emailAddress); // set the second activity's top as the value input in Main activity
 
+        // Pre-fill the phone number
+        EditText et_phone = findViewById(R.id.editText_Phone);
+        // Set the phone number to EditText if it was previously saved
+        et_phone.setText(phoneNumber);
 //        make phone call
         Button btC_N = findViewById(R.id.button_callNumber);
         btC_N.setOnClickListener(clk->{
             // get the phone number
-            EditText et_phone = findViewById(R.id.editText_Phone);
-            String phoneNumber = et_phone.getText().toString();
             Intent call = new Intent(Intent.ACTION_DIAL);
-            call.setData(Uri.parse("tel:" + phoneNumber));
+            call.setData(Uri.parse("tel:" + et_phone.getText().toString()));
             startActivity(call);
         });
 
@@ -102,5 +110,20 @@ public class SecondActivity extends AppCompatActivity {
             profileImage.setImageBitmap(theImage);
         }
 
+    }
+
+    protected void onPause(){
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("MyData",Context.MODE_PRIVATE);
+        EditText et_phone = findViewById(R.id.editText_Phone);
+        // Get the current phone number from EditText
+        String phoneNumber = et_phone.getText().toString();
+
+        SharedPreferences.Editor editor = prefs.edit();
+        // Save the phone number
+        editor.putString("PhoneNumber",phoneNumber);
+        editor.apply();
+
+        Log.w("SecondActivity","In onPause() - Saving phone number");
     }
 }
