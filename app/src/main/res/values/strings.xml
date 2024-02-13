@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Ping\'s Android Labs</string>
-    <string name="hello_message">Hello world!</string>
-    <string name="button_message">I\'m a button</string>
+    <string name="pwd_message">Type your Password:</string>
+    <string name="button_message">LOGIN</string>
+    <string name="pwd_success_message">Your password meets the requirements</string>
+    <string name="upper_case_message">Please entre at least one upper case</string>
+    <string name="lower_case_message">Please entre at least one lower case</string>
+    <string name="number_case_message">Please entre at least one number</string>
+    <string name="special_case_message">Please entre at least one special character</string>
+    <string name="toast_pwd_success_message">Password is complex enough.</string>
+    <string name="pwd_fail_message">You shall not pass!</string>
 </resources>
