@@ -10,4 +10,11 @@
     <string name="receiveButton">RECEIVE</string>
     <string name="toolbar_delete_message">Delete this item</string>
     <string name="author_info">About</string>
+    <string name="author_info_detail">Version 1.0, created by Ping Liang</string>
+    <string name="delete_all_message">Are you sure you want to delete all messages?</string>
+    <string name="delete_all_message_title">Confirmation:</string>
+    <string name="comfirmation_deleted_all">All messages deleted</string>
+    <string name="prompt_delete_message">"Do you want to delete the message: "</string>
+    <string name="prompt_delete_message_title">"Question: "</string>
+    <string name="comfirmation_deleted_single">You deleted message #</string>
 </resources>

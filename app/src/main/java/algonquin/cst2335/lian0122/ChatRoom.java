@@ -1,10 +1,13 @@
 package algonquin.cst2335.lian0122;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -133,10 +137,55 @@ public class ChatRoom extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (item.getItemId() == R.id.item_1) {
+            showDeleteAllMessagesDialog();
+            return true;
+        } else if (item.getItemId() == R.id.item_2) {
+            showToastAbout();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    private void showDeleteAllMessagesDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoom.this);
+        builder.setMessage(R.string.delete_all_message)
+                .setTitle(R.string.delete_all_message_title)
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", (dialog, cl) -> {
+                    // Keep a temporary copy for undo functionality
+                    List<ChatMessage> tempMessages = new ArrayList<>(chatMessages);
+                    chatMessages.clear();
+                    myAdapter.notifyDataSetChanged(); // Since all items are removed
+
+                    new Thread(() -> {
+                        mDAO.deleteAllMessages(); // Delete all messages from the database
+                        runOnUiThread(() -> {
+                            Snackbar.make(binding.getRoot(), R.string.comfirmation_deleted_all, Snackbar.LENGTH_LONG)
+                                    .setAction("Undo", clk -> {
+                                        new Thread(() -> {
+                                            mDAO.insertAllMessages(tempMessages); // Re-insert all messages into the database
+                                            chatMessages.addAll(tempMessages); // Restore local list
+                                            runOnUiThread(myAdapter::notifyDataSetChanged); // Refresh the entire list
+                                        }).start();
+                                    })
+                                    .show();
+                        });
+                    }).start();
+                })
+                .show();
+    }
+
+    private void showToastAbout() {
+        Toast.makeText(this, R.string.author_info_detail, Toast.LENGTH_SHORT).show();
+    }
     private void promptForDelete(int position, TextView messageView) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoom.this);
-        builder.setMessage("Do you want to delete the message: " + messageView.getText())
-                .setTitle("Question: ")
+        builder.setMessage(getString(R.string.prompt_delete_message) + messageView.getText())
+                .setTitle(R.string.prompt_delete_message_title)
                 .setNegativeButton("No", null)
                 .setPositiveButton("Yes", (dialog, cl) -> {
                     ChatMessage removedMessage = chatMessages.remove(position);
@@ -144,7 +193,7 @@ public class ChatRoom extends AppCompatActivity {
                         mDAO.deleteMessage(removedMessage); // Delete from database
                         runOnUiThread(() -> {
                             myAdapter.notifyItemRemoved(position);
-                            Snackbar.make(messageView, "You deleted message #" + position, Snackbar.LENGTH_LONG)
+                            Snackbar.make(messageView, getString(R.string.comfirmation_deleted_single ) + position, Snackbar.LENGTH_LONG)
                                     .setAction("Undo", clk -> {
                                         new Thread(() -> {
                                             mDAO.insertMessage(removedMessage); // Re-insert into database on Undo

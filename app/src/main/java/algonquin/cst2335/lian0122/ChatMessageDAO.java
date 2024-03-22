@@ -18,4 +18,10 @@ public interface ChatMessageDAO {
 
     @Delete
     void deleteMessage(ChatMessage m);
+
+    @Query("DELETE FROM ChatMessage")
+    void deleteAllMessages();
+
+    @Insert
+    void insertAllMessages(List<ChatMessage> m);
 }
