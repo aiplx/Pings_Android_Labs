@@ -8,4 +8,6 @@
     <string name="time_message2">Time goes here</string>
     <string name="sendButton">SEND</string>
     <string name="receiveButton">RECEIVE</string>
+    <string name="toolbar_delete_message">Delete this item</string>
+    <string name="author_info">About</string>
 </resources>

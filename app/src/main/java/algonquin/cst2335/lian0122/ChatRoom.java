@@ -1,6 +1,7 @@
 package algonquin.cst2335.lian0122;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -125,6 +126,11 @@ public class ChatRoom extends AppCompatActivity {
                 binding.textInput.setText(""); // Clear the previous text
             });
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
     }
 
     private void promptForDelete(int position, TextView messageView) {

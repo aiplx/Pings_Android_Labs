@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_1"
+        android:icon="@drawable/delete"
+        android:title="@string/toolbar_delete_message"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_2"
+        android:title="@string/author_info"
+        app:showAsAction="never" />
+</menu>
